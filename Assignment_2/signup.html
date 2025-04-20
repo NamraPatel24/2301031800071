@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Traveler - Signup</title>
+</head>
+<body>
+    <style>* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    
+    body {
+        background-color: #000000;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    header {
+        background-color: #b9ff66;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #000000;
+    }
+    
+    main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .form-container {
+        background-color: #2d2d2d;
+        border-radius: 30px;
+        padding: 40px;
+        width: 100%;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    label {
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 10px;
+        width: 45%;
+        text-align: right;
+    }
+    
+    input {
+        background-color: #d9d9d9;
+        border: none;
+        border-radius: 15px;
+        padding: 10px 15px;
+        font-size: 1rem;
+        width: 55%;
+        height: 40px;
+    }
+    
+    .signup-btn {
+        background-color: #b9ff66;
+        color: #000000;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        display: block;
+        margin: 40px auto 0;
+        width: 150px;
+        text-align: center;
+    }
+    
+    .signup-btn:hover {
+        opacity: 0.9;
+    }
+    
+    .error {
+        border: 2px solid red;
+    }
+    
+    .error-message {
+        color: red;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        text-align: right;
+    }
+    
+    @media (max-width: 600px) {
+        .form-group {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        label {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 100%;
+        }
+    }</style>
+    <div class="container">
+        <header>
+            <h1>AR Traveler</h1>
+        </header>
+        <main>
+            <div class="form-container">
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">New Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="signup-btn">Signup</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('signup-form');
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Reset previous error states
+            clearErrors();
+            
+            // Validate form
+            let isValid = true;
+            
+            if (firstName === '') {
+                showError('firstName', 'First name is required');
+                isValid = false;
+            }
+            
+            if (lastName === '') {
+                showError('lastName', 'Last name is required');
+                isValid = false;
+            }
+            
+            if (email === '') {
+                showError('email', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('email', 'Please enter a valid email');
+                isValid = false;
+            }
+            
+            if (password === '') {
+                showError('password', 'Password is required');
+                isValid = false;
+            } else if (password.length < 6) {
+                showError('password', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+            
+            if (confirmPassword === '') {
+                showError('confirmPassword', 'Please confirm your password');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showError('confirmPassword', 'Passwords do not match');
+                isValid = false;
+            }
+            
+            // If form is valid, submit
+            if (isValid) {
+                // In a real application, you would send this data to a server
+                alert('Signup successful! Welcome to AR Traveler.');
+                form.reset();
+            }
+        });
+        
+        // Helper functions
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            input.classList.add('error');
+            
+            // Create error message element if it doesn't exist
+            let errorElement = input.nextElementSibling;
+            if (!errorElement || !errorElement.classList.contains('error-message')) {
+                errorElement = document.createElement('div');
+                errorElement.classList.add('error-message');
+                input.parentNode.insertBefore(errorElement, input.nextSibling);
+            }
+            
+            errorElement.textContent = message;
+        }
+        
+        function clearErrors() {
+            const inputs = form.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.classList.remove('error');
+                
+                // Remove error message if it exists
+                const errorElement = input.nextElementSibling;
+                if (errorElement && errorElement.classList.contains('error-message')) {
+                    errorElement.remove();
+                }
+            });
+        }
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    });</script>
+</body>
+</html>
