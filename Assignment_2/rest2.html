@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel App - Restaurant Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    max-height: 900px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.photo-viewer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.restaurant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.location-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.location {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.location-icon {
+    color: #b9ff66;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    transform: translateY(-50%);
+}
+
+.nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #b9ff66;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000000;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.nav-btn:hover {
+    opacity: 1;
+}
+
+.rating-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    margin: 0 20px;
+}
+
+.rating-label {
+    font-weight: 500;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+}
+
+.fa-star {
+    color: #b9ff66;
+    font-size: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .app-container {
+        border-radius: 0;
+        max-height: 100vh;
+    }
+    
+    .location-bar {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+    }
+    
+    .rating-bar {
+        bottom: 20px;
+        margin: 0 15px;
+    }
+}
+    </style>
+    <div class="app-container">
+        <div class="photo-viewer">
+            <img src="/placeholder.svg?height=800&width=400" alt="Restaurant interior view" class="restaurant-image">
+            
+            <div class="location-bar">
+                <div class="location">
+                    <i class="fa-solid fa-location-dot location-icon"></i>
+                    <span>Patang-Ahmedabad</span>
+                </div>
+                <div class="controls">
+                    <button class="control-btn edit-btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="control-btn close-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn prev">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn next">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="rating-bar">
+                <span class="rating-label">Rating</span>
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

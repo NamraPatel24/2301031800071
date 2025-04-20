@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Travel App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+    <style>* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #1b1b1b;
+        color: #ffffff;
+    }
+    
+    .app-container {
+        max-width: 430px;
+        margin: 0 auto;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    /* Header styles */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    
+    .menu-button {
+        width: 40px;
+        height: 40px;
+        background-color: #292929;
+        border: none;
+        border-radius: 50%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 4px;
+        padding: 12px;
+        cursor: pointer;
+    }
+    
+    .menu-button span {
+        width: 6px;
+        height: 6px;
+        background-color: #7e7e7e;
+        border-radius: 50%;
+    }
+    
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
+    
+    .profile-pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Welcome section styles */
+    .welcome-section {
+        margin-bottom: 40px;
+        position: relative;
+    }
+    
+    h1 {
+        font-size: 42px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+    
+    .destination {
+        font-size: 72px;
+        font-weight: 700;
+        display: block;
+        margin-top: -5px;
+    }
+    
+    .decorative-curve {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        opacity: 0.7;
+    }
+    
+    /* Category cards styles */
+    .categories {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .category-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-radius: 30px;
+        height: 90px;
+    }
+    
+    .card-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+    
+    .category-icon svg {
+        width: 24px;
+        height: 24px;
+        color: #000000;
+    }
+    
+    h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .card-right {
+        text-align: right;
+    }
+    
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .view-all {
+        color: inherit;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px;
+        font-size: 16px;
+    }
+    
+    .view-all svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* Category-specific styles */
+    .popular {
+        background-color: #21d1cc;
+        color: #000000;
+    }
+    
+    .restaurants {
+        background-color: #ffc4dd;
+        color: #000000;
+    }
+    
+    .nightlife {
+        background-color: #7f6cff;
+        color: #000000;
+    }
+    
+    .shopping {
+        background-color: #b9ff66;
+        color: #000000;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 430px) {
+        .app-container {
+            padding: 15px;
+        }
+        
+        h1 {
+            font-size: 36px;
+        }
+        
+        .destination {
+            font-size: 60px;
+        }
+        
+        h2 {
+            font-size: 20px;
+        }
+        
+        h3 {
+            font-size: 20px;
+        }
+    }</style>
+    <div class="app-container">
+        <header>
+            <button class="menu-button">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="profile-pic">
+                <img src="/placeholder.svg?height=40&width=40" alt="Profile picture">
+            </div>
+        </header>
+
+        <main>
+            <div class="welcome-section">
+                <h1>Welcome to <br><span class="destination">India</span></h1>
+                <img src="/placeholder.svg?height=50&width=100" alt="Decorative curve" class="decorative-curve">
+            </div>
+
+            <div class="categories">
+                <div class="category-card popular">
+                    <div class="card-left">
+                        <div class="category-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h2>Most Popular</h2>
+                    </div>
+                    <div class="card-right">
+                        <h3>10 places</h3>
+                        <a href="#" class="view-all">View All <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="category-card restaurants">
+                    <div class="card-left">
+                        <div class="category-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 18h18M3 12h18M3 6h18"/>
+                            </svg>
+                        </div>
+                        <h2>Restaurants</h2>
+                    </div>
+                    <div class="card-right">
+                        <h3>25 places</h3>
+                        <a href="#" class="view-all">View All <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="category-card nightlife">
+                    <div class="card-left">
+                        <div class="category-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                <path d="M2 12h20"/>
+                            </svg>
+                        </div>
+                        <h2>Nightlife</h2>
+                    </div>
+                    <div class="card-right">
+                        <h3>16 places</h3>
+                        <a href="#" class="view-all">View All <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="category-card shopping">
+                    <div class="card-left">
+                        <div class="category-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                <line x1="3" y1="6" x2="21" y2="6"/>
+                                <path d="M16 10a4 4 0 0 1-8 0"/>
+                            </svg>
+                        </div>
+                        <h2>Shopping</h2>
+                    </div>
+                    <div class="card-right">
+                        <h3>8 places</h3>
+                        <a href="#" class="view-all">View All <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

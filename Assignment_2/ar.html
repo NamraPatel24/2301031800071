@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Navigation - Ahmedabad</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <style>/* Base Styles */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+            "Helvetica Neue", sans-serif;
+        }
+        
+        body {
+          height: 100vh;
+          overflow: hidden;
+        }
+        
+        .app-container {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+        }
+        
+        /* Background Image */
+        .background-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AR_Travel_App__Community_-WQebmarOd98mITwrNmVBzP39hmPrDg.png");
+          background-size: cover;
+          background-position: center;
+          z-index: -1;
+        }
+        
+        /* Top Navigation Bar */
+        .top-nav {
+          position: absolute;
+          top: 40px;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 20px;
+          z-index: 10;
+        }
+        
+        .location-pill {
+          display: flex;
+          align-items: center;
+          background-color: rgba(40, 40, 40, 0.8);
+          padding: 10px 20px;
+          border-radius: 30px;
+          color: white;
+        }
+        
+        .location-icon {
+          color: #b9ff66;
+          margin-right: 10px;
+          font-size: 18px;
+        }
+        
+        .location-text {
+          font-size: 18px;
+          font-weight: 500;
+        }
+        
+        .nav-controls {
+          display: flex;
+          gap: 10px;
+        }
+        
+        .nav-button {
+          width: 50px;
+          height: 50px;
+          border-radius: 12px;
+          background-color: rgba(40, 40, 40, 0.8);
+          border: none;
+          color: white;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+        
+        /* AR Navigation Path */
+        .ar-path {
+          position: absolute;
+          bottom: 150px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60%;
+          height: 180px;
+          background-color: rgba(185, 255, 102, 0.4);
+          border-radius: 10px;
+          perspective: 400px;
+          transform-style: preserve-3d;
+          transform: translateX(-50%) rotateX(60deg);
+        }
+        
+        .chevron {
+          position: absolute;
+          width: 40px;
+          height: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          overflow: hidden;
+        }
+        
+        .chevron::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-style: solid;
+          border-width: 0 3px 3px 0;
+          border-color: #000;
+          transform: rotate(45deg);
+          top: -10px;
+          left: 10px;
+        }
+        
+        .chevron-1 {
+          bottom: 30px;
+        }
+        
+        .chevron-2 {
+          bottom: 70px;
+        }
+        
+        .chevron-3 {
+          bottom: 110px;
+        }
+        
+        /* Bottom Navigation Instructions */
+        .nav-instructions {
+          position: absolute;
+          bottom: 40px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          background-color: rgba(0, 0, 0, 0.7);
+          border-radius: 15px;
+          padding: 15px;
+          width: 90%;
+          max-width: 400px;
+        }
+        
+        .turn-icon {
+          width: 60px;
+          height: 60px;
+          background-color: #b9ff66;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          margin-right: 15px;
+        }
+        
+        .instruction-details {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        
+        .primary-instruction {
+          color: white;
+          font-size: 22px;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+        
+        .secondary-instruction {
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+        }
+        
+        .separator {
+          margin: 0 10px;
+        }
+        
+        .walking-icon {
+          margin-right: 5px;
+        }
+        </style>
+    <div class="app-container">
+        <!-- Background Image -->
+        <div class="background-image"></div>
+        
+        <!-- Top Navigation Bar -->
+        <div class="top-nav">
+            <div class="location-pill">
+                <div class="location-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="location-text">Ahmedabad</div>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="nav-button compass-button">
+                    <i class="fas fa-compass"></i>
+                </button>
+                <button class="nav-button close-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- AR Navigation Path -->
+        <div class="ar-path">
+            <div class="chevron chevron-1"></div>
+            <div class="chevron chevron-2"></div>
+            <div class="chevron chevron-3"></div>
+        </div>
+        
+        <!-- Bottom Navigation Instructions -->
+        <div class="nav-instructions">
+            <div class="turn-icon">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="instruction-details">
+                <div class="primary-instruction">Turn Left in 200m</div>
+                <div class="secondary-instruction">
+                    <span class="distance">1.3km away</span>
+                    <span class="separator">|</span>
+                    <span class="walking-icon"><i class="fas fa-walking"></i></span>
+                    <span class="time">15 mins</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
