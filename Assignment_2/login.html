@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Traveler</title>
+    
+   
+</head>
+<body>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #c2ff66;
+    padding: 24px;
+    text-align: center;
+}
+
+.header h1 {
+    color: #000000;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-container {
+    background-color: #333333;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 24px;
+    padding: 32px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    position: relative;
+}
+
+.form-group label {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    width: 33%;
+}
+
+.form-group input {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 16px;
+    width: 67%;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #c2ff66;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    display: none;
+}
+
+.login-button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+}
+
+.login-button {
+    background-color: #c2ff66;
+    color: black;
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 8px 48px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #b3ff33;
+    transform: translateY(-2px);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.link-container {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.link-container a {
+    color: white;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.link-container a:hover {
+    color: #c2ff66;
+}
+
+.status-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+.success {
+    background-color: rgba(46, 213, 115, 0.2);
+    color: #2ed573;
+}
+
+.error {
+    background-color: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+    </style>
+    <!-- Header -->
+    <header class="header">
+        <h1>AR Traveler</h1>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="login-container">
+            <form id="loginForm">
+                <!-- Username Field -->
+                <div class="form-group">
+                    <label for="username">User Name</label>
+                    <input type="text" id="username" required>
+                    <div class="error-message" id="usernameError">Please enter a valid username</div>
+                </div>
+                
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                    <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+                </div>
+                
+                <!-- Login Button -->
+                <div class="login-button-container">
+                    <button type="submit" class="login-button" id="loginButton">Login</button>
+                </div>
+                
+                <!-- Status Message -->
+                <div class="status-message" id="statusMessage"></div>
+            </form>
+            
+            <!-- Sign Up Link -->
+            <div class="link-container">
+                <a href="#" id="signupLink">Sign Up? Create a new account</a>
+            </div>
+            
+            <!-- Forgot Password Link -->
+            <div class="link-container">
+                <a href="#" id="forgotPasswordLink">Forgot Password</a>
+            </div>
+        </div>
+    </main>
+
+   
+   <script>
+      // DOM Elements
+  const loginForm = document.getElementById('loginForm');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const usernameError = document.getElementById('usernameError');
+  const passwordError = document.getElementById('passwordError');
+  const loginButton = document.getElementById('loginButton');
+  const statusMessage = document.getElementById('statusMessage');
+  const signupLink = document.getElementById('signupLink');
+  const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+  // Form validation
+  function validateForm() {
+      let isValid = true;
+      
+      // Username validation
+      if (usernameInput.value.trim() === '') {
+          usernameError.style.display = 'block';
+          usernameInput.style.boxShadow = '0 0 0 2px #ff6b6b';
+          isValid = false;
+      } else {
+          usernameError.style.display = 'none';
+          usernameInput.style.boxShadow = '';
+      }
+      
+      // Password validation
+      if (passwordInput.value.length < 6) {
+          passwordError.style.display = 'block';
+          passwordInput.style.boxShadow = '0 0 0 2px #ff6b6b';
+          isValid = false;
+      } else {
+          passwordError.style.display = 'none';
+          passwordInput.style.boxShadow = '';
+      }
+      
+      return isValid;
+  }
+
+  // Form submission
+  loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      if (validateForm()) {
+          // Simulate API call with timeout
+          loginButton.disabled = true;
+          loginButton.textContent = 'Logging in...';
+          
+          setTimeout(() => {
+              // Successful login simulation
+              statusMessage.textContent = 'Login successful! Redirecting...';
+              statusMessage.className = 'status-message success';
+              statusMessage.style.display = 'block';
+              
+              // Simulate redirect after successful login
+              setTimeout(() => {
+                  alert('Welcome to AR Traveler, ' + usernameInput.value + '!');
+                  // In a real app, you would redirect here
+                  // window.location.href = 'dashboard.html';
+              }, 2000);
+          }, 1500);
+      } else {
+          // Show error animation
+          loginContainer.classList.add('shake');
+          setTimeout(() => {
+              loginContainer.classList.remove('shake');
+          }, 500);
+          
+          statusMessage.textContent = 'Please fix the errors above';
+          statusMessage.className = 'status-message error';
+          statusMessage.style.display = 'block';
+      }
+  });
+
+  // Input focus events
+  usernameInput.addEventListener('focus', function() {
+      usernameError.style.display = 'none';
+      this.style.boxShadow = '';
+  });
+
+  passwordInput.addEventListener('focus', function() {
+      passwordError.style.display = 'none';
+      this.style.boxShadow = '';
+  });
+
+  // Sign up link
+  signupLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      alert('Sign up functionality would open here');
+  });
+
+  // Forgot password link
+  forgotPasswordLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      alert('Password recovery functionality would open here');
+  });
+
+  // Get login container for shake animation
+  const loginContainer = document.querySelector('.login-container');
+   </script>
+</body>
+</html>
